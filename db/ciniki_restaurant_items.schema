@@ -1,0 +1,35 @@
+#
+# Description
+# -----------
+# The restaurants table stores information about restaurants that are related
+# to the business, or the business will be attending.
+#
+# Fields
+# ------
+# id:				The ID assigned to the restaurant.
+# uuid:				The Universal Unique ID.
+# business_id:		The business the restaurant is attached to.
+#
+# name:				The name for the restaurant.
+#
+#
+# date_added:		The UTC date and time the record was added.
+# last_updated:		The UTC date and time the record was last updated.
+#
+create table ciniki_restaurants_items (
+	id int not null auto_increment,
+	uuid char(36) not null,
+	business_id int not null,
+	name varchar(150) not null,
+	category_id int not null,
+	item_number varchar(50) not null,
+	price decimal(18,4) not null,
+	primary_image_id int not null,
+	description varchar(6000) not null,
+	date_added datetime not null,
+	last_updated datetime not null,
+	primary key (id),
+	unique index (uuid),
+	index (business_id, name, start_date),
+	index sync (business_id, uuid, last_updated)
+) ENGINE='InnoDB', COMMENT='v1.01';
