@@ -9,7 +9,7 @@
 // Returns
 // -------
 //
-function ciniki_events_objects($ciniki) {
+function ciniki_restaurants_objects($ciniki) {
 	
 	$objects = array();
 	$objects['menu'] = array(
