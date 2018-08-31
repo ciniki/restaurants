@@ -13,61 +13,49 @@ function ciniki_restaurants_objects($ciniki) {
     
     $objects = array();
     $objects['menu'] = array(
-        'name'=>'Menu',
-        'sync'=>'yes',
-        'table'=>'ciniki_restaurant_menus',
-        'fields'=>array(
-            'name'=>array(),
-            'permalink'=>array(),
-            'primary_image_id'=>array('ref'=>'ciniki.images.image'),
-            'description'=>array('default'=>'yes'),
+        'name' => 'Menu',
+        'sync' => 'yes',
+        'o_name' => 'menu',
+        'o_container' => 'menus',
+        'table' => 'ciniki_restaurants_menus',
+        'fields' => array(
+            'name' => array('name'=>'Name'),
+            'permalink' => array('name'=>'Permalink', 'default'=>''),
+            'primary_image_id' => array('name'=>'Image', 'ref'=>'ciniki.images.image'),
+            'description' => array('name'=>'Description', 'default'=>''),
             ),
-        'history_table'=>'ciniki_restaurant_history',
+        'history_table' => 'ciniki_restaurants_history',
         );
-    $objects['category'] = array(
-        'name'=>'Category',
-        'sync'=>'yes',
-        'table'=>'ciniki_restaurant_categories',
-        'fields'=>array(
-            'name'=>array(),
-            'permalink'=>array(),
-            'primary_image_id'=>array('ref'=>'ciniki.images.image'),
-            'description'=>array('default'=>''),
+    $objects['menucategory'] = array(
+        'name' => 'Category',
+        'sync' => 'yes',
+        'o_name' => 'category',
+        'o_container' => 'categories',
+        'table' => 'ciniki_restaurants_menu_categories',
+        'fields' => array(
+            'menu_id' => array('name'=>'', 'ref'=>'ciniki.restaurants.menu'),
+            'name' => array('name'=>'Name'),
+            'permalink' => array('name'=>'Permalink', 'default'=>''),
+            'primary_image_id' => array('name'=>'Image', 'ref'=>'ciniki.image.image'),
+            'description' => array('name'=>'Description', 'default'=>''),
             ),
-        'history_table'=>'ciniki_restaurant_history',
+        'history_table' => 'ciniki_restaurants_history',
         );
-    $objects['item'] = array(
-        'name'=>'Item',
-        'sync'=>'yes',
-        'table'=>'ciniki_restaurant_items',
-        'fields'=>array(
-            'code'=>array(),
-            'name'=>array(),
-            'price'=>array(),
-            'primary_image_id'=>array('ref'=>'ciniki.images.image'),
-            'synopsis'=>array(),
+    $objects['menuitem'] = array(
+        'name' => 'Item',
+        'sync' => 'yes',
+        'o_name' => 'item',
+        'o_container' => 'items',
+        'table' => 'ciniki_restaurants_menu_items',
+        'fields' => array(
+            'category_id' => array('name'=>'', 'ref'=>'ciniki.restaurants.menucategory'),
+            'code' => array('name'=>'Code', 'default'=>''),
+            'name' => array('name'=>'Name'),
+            'price' => array('name'=>'Price', 'default'=>''),
+            'primary_image_id' => array('name'=>'Image', 'ref'=>'ciniki.images.image'),
+            'synopsis' => array('name'=>'Synopsis', 'default'=>''),
             ),
-        'history_table'=>'ciniki_restaurant_history',
-        );
-    $objects['item_menu'] = array(
-        'name'=>'File',
-        'sync'=>'yes',
-        'table'=>'ciniki_restaurant_item_menus',
-        'fields'=>array(
-            'item_id'=>array('ref'=>'ciniki.restaurants.item'),
-            'menu_id'=>array('ref'=>'ciniki.restaurants.menu'),
-            ),
-        'history_table'=>'ciniki_restaurant_history',
-        );
-    $objects['item_category'] = array(
-        'name'=>'Price',
-        'sync'=>'yes',
-        'table'=>'ciniki_restaurant_item_categories',
-        'fields'=>array(
-            'item_id'=>array('ref'=>'ciniki.restaurants.item'),
-            'category_id'=>array('ref'=>'ciniki.restaurants.category'),
-            ),
-        'history_table'=>'ciniki_restaurant_history',
+        'history_table' => 'ciniki_restaurants_history',
         );
     
     return array('stat'=>'ok', 'objects'=>$objects);
