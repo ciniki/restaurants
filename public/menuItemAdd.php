@@ -94,6 +94,16 @@ function ciniki_restaurants_menuItemAdd(&$ciniki) {
     $item_id = $rc['id'];
 
     //
+    // Update the sequences
+    //
+    ciniki_core_loadMethod($ciniki, 'ciniki', 'restaurants', 'private', 'sectionSequencesUpdate');
+    $rc = ciniki_restaurants_sectionSequencesUpdate($ciniki, $args['tnid'], $args['section_id'], $args['sequence'], -1);
+    if( $rc['stat'] != 'ok' ) {
+        ciniki_core_dbTransactionRollback($ciniki, 'ciniki.restaurants');
+        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.restaurants.36', 'msg'=>'Unable to add item', 'err'=>$rc['err']));
+    }
+
+    //
     // Commit the transaction
     //
     $rc = ciniki_core_dbTransactionCommit($ciniki, 'ciniki.restaurants');

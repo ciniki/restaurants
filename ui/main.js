@@ -242,7 +242,7 @@ function ciniki_restaurants_main() {
     this.section.nplist = [];
     this.section.sections = {
         'general':{'label':'', 'fields':{
-            'sequence':{'label':'Order', 'type':'text'},
+            'sequence':{'label':'Order', 'type':'text', 'size':'small'},
             'name':{'label':'Name', 'required':'yes', 'type':'text'},
             }},
         '_intro':{'label':'Introduction', 'fields':{
@@ -300,6 +300,7 @@ function ciniki_restaurants_main() {
                     M.api.err(rsp);
                     return false;
                 }
+                M.ciniki_restaurants_main.menu.section_id = rsp.id;
                 M.ciniki_restaurants_main.section.section_id = rsp.id;
                 eval(cb);
             });
@@ -354,10 +355,10 @@ function ciniki_restaurants_main() {
         }}, */
         'general':{'label':'', 'fields':{
             'section_id':{'label':'Sections', 'type':'select', 'options':{}, 'complex_options':{'name':'name', 'value':'id'}},
-            'sequence':{'label':'Order', 'type':'text'},
-//            'code':{'label':'Code', 'type':'text'},
+            'sequence':{'label':'Order', 'type':'text', 'size':'small'},
+//            'code':{'label':'Code', 'type':'text', 'size':'small'},
             'name':{'label':'Name', 'required':'yes', 'type':'text'},
-            'price':{'label':'Price', 'type':'text'},
+            'price':{'label':'Price', 'type':'text', 'size':'small'},
 //            'foodtypes':{'label':'Food Types', 'type':'text'},
             }},
         '_synopsis':{'label':'Synopsis', 'fields':{

@@ -89,10 +89,10 @@ function ciniki_restaurants_web_processRequestMenu(&$ciniki, $settings, $tnid, $
             ),
         ));
     if( $rc['stat'] != 'ok' ) {
-        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.restaurants.8', 'msg'=>'Menu not found', 'err'=>$rc['err']));
+        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.restaurants.34', 'msg'=>'Menu not found', 'err'=>$rc['err']));
     }
     if( !isset($rc['menus'][0]) ) {
-        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.restaurants.9', 'msg'=>'Unable to find Menu'));
+        return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.restaurants.35', 'msg'=>'Unable to find Menu'));
     }
     $menu = $rc['menus'][0];
 

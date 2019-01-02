@@ -45,6 +45,7 @@ function ciniki_restaurants_menuSectionUpdate(&$ciniki) {
     //
     $strsql = "SELECT id, "
         . "menu_id, "
+        . "sequence, "
         . "name, "
         . "permalink "
         . "FROM ciniki_restaurant_menu_sections "
@@ -102,6 +103,18 @@ function ciniki_restaurants_menuSectionUpdate(&$ciniki) {
     if( $rc['stat'] != 'ok' ) {
         ciniki_core_dbTransactionRollback($ciniki, 'ciniki.restaurants');
         return $rc;
+    }
+
+    //
+    // Update the sequences
+    //
+    if( isset($args['sequence']) ) {
+        ciniki_core_loadMethod($ciniki, 'ciniki', 'restaurants', 'private', 'menuSequencesUpdate');
+        $rc = ciniki_restaurants_menuSequencesUpdate($ciniki, $args['tnid'], $section['menu_id'], $args['sequence'], $section['sequence']);
+        if( $rc['stat'] != 'ok' ) {
+            ciniki_core_dbTransactionRollback($ciniki, 'ciniki.restaurants');
+            return array('stat'=>'fail', 'err'=>array('code'=>'ciniki.restaurants.33', 'msg'=>'Unable to add section', 'err'=>$rc['err']));
+        }
     }
 
     //
