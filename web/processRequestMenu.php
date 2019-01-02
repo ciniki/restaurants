@@ -100,8 +100,8 @@ function ciniki_restaurants_web_processRequestMenu(&$ciniki, $settings, $tnid, $
     //
     // Display the menu
     //
-    if( isset($section['intro']) && $section['intro'] != '' ) {
-        $page['blocks'][] = array('type'=>'content', 'wide'=>'yes', 'content'=>$section['intro']);
+    if( isset($menu['intro']) && $menu['intro'] != '' ) {
+        $page['blocks'][] = array('type'=>'content', 'wide'=>'yes', 'content'=>$menu['intro']);
     }
     if( isset($menu['sections']) ) {
         foreach($menu['sections'] as $section) {
@@ -112,16 +112,15 @@ function ciniki_restaurants_web_processRequestMenu(&$ciniki, $settings, $tnid, $
             }
 
             if( isset($section['items']) ) {
-                $page['blocks'][] = array('type'=>'priceditems', 'title'=>$title, 'list'=>$section['items']);
+                $page['blocks'][] = array('type'=>'priceditems', 'wide'=>'yes', 'title'=>$title, 'list'=>$section['items']);
             }
 
             if( isset($section['notes']) && $section['notes'] != '' ) {
                 $page['blocks'][] = array('type'=>'content', 'wide'=>'yes', 'content'=>$section['notes']);
             }
-
         }
     }
-    if( isset($section['notes']) && $menu['notes'] != '' ) {
+    if( isset($menu['notes']) && $menu['notes'] != '' ) {
         $page['blocks'][] = array('type'=>'content', 'wide'=>'yes', 'content'=>$menu['notes']);
     }
 

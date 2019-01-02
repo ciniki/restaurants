@@ -49,7 +49,9 @@ function ciniki_restaurants_main() {
     this.menu.section_id = 0;
     this.menu.sections = {
         'details':{'label':'Menu', 'type':'simplegrid', 'num_cols':1, 'aside':'yes', 
-            
+            'editFn':function(s, i, d) {
+                return 'M.ciniki_restaurants_main.edit.open(\'M.ciniki_restaurants_main.menu.open();\',M.ciniki_restaurants_main.menu.menu_id);';
+                },
             },
         'sections':{'label':'Sections', 'type':'simplegrid', 'num_cols':1, 'aside':'yes',
             'cellClasses':['multiline', ''],
