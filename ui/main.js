@@ -221,15 +221,15 @@ function ciniki_restaurants_main() {
         }
     }
     this.edit.remove = function() {
-        if( confirm('Are you sure you want to remove menu?') ) {
-            M.api.getJSONCb('ciniki.restaurants.menuDelete', {'tnid':M.curTenantID, 'menu_id':this.menu_id}, function(rsp) {
+        M.confirm('Are you sure you want to remove menu?',null,function() {
+            M.api.getJSONCb('ciniki.restaurants.menuDelete', {'tnid':M.curTenantID, 'menu_id':M.ciniki_restaurants_main.edit.menu_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
                 }
                 M.ciniki_restaurants_main.edit.close();
             });
-        }
+        });
     }
     this.edit.addButton('save', 'Save', 'M.ciniki_restaurants_main.edit.save();');
     this.edit.addClose('Cancel');
@@ -309,15 +309,15 @@ function ciniki_restaurants_main() {
         }
     }
     this.section.remove = function() {
-        if( confirm('Are you sure you want to remove menusection?') ) {
-            M.api.getJSONCb('ciniki.restaurants.menuSectionDelete', {'tnid':M.curTenantID, 'section_id':this.section_id}, function(rsp) {
+        M.confirm('Are you sure you want to remove menusection?',null,function() {
+            M.api.getJSONCb('ciniki.restaurants.menuSectionDelete', {'tnid':M.curTenantID, 'section_id':M.ciniki_restaurants_main.section.section_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
                 }
                 M.ciniki_restaurants_main.section.close();
             });
-        }
+        });
     }
     this.section.nextButtonFn = function() {
         if( this.nplist != null && this.nplist.indexOf('' + this.section_id) < (this.nplist.length - 1) ) {
@@ -423,15 +423,15 @@ function ciniki_restaurants_main() {
         }
     }
     this.item.remove = function() {
-        if( confirm('Are you sure you want to remove menuitem?') ) {
-            M.api.getJSONCb('ciniki.restaurants.menuItemDelete', {'tnid':M.curTenantID, 'item_id':this.item_id}, function(rsp) {
+        M.confirm('Are you sure you want to remove menuitem?',null,function() {
+            M.api.getJSONCb('ciniki.restaurants.menuItemDelete', {'tnid':M.curTenantID, 'item_id':M.ciniki_restaurants_main.item.item_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
                 }
                 M.ciniki_restaurants_main.item.close();
             });
-        }
+        });
     }
     this.item.nextButtonFn = function() {
         if( this.nplist != null && this.nplist.indexOf('' + this.item_id) < (this.nplist.length - 1) ) {
@@ -467,7 +467,7 @@ function ciniki_restaurants_main() {
         //
         var ac = M.createContainer(ap, 'ciniki_restaurants_main', 'yes');
         if( ac == null ) {
-            alert('App Error');
+            M.alert('App Error');
             return false;
         }
         
